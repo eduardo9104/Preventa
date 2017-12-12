@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Preventa</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Catálogo</string>
+    <string name="title_carshop">Pedidos</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="action_search">Buscar</string>
+    <string name="action_buy">Comprar</string>
+    <string name="action_cancel">Cancelar</string>
+    <string name="action_edit">Editar</string>
+    <string name="action_delete">Eliminar</string>
+</resources>

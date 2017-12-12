@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginTop="5dp"
+    card_view:cardCornerRadius="5dp">
+    <RelativeLayout
+        android:id="@+id/fragment_product_relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp">
+    <TextView
+        android:id="@+id/fragment_pedido_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:visibility="gone" />
+    <TextView
+        android:id="@+id/fragment_pedido_text_name"
+        android:text="@string/action_buy"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/fragment_pedido_text_cantidad"
+        android:text="@string/action_buy"
+        android:layout_below="@id/fragment_pedido_text_name"
+        android:layout_width="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/fragment_pedido_text_precio"
+        android:layout_below="@id/fragment_pedido_text_cantidad"
+        android:text="@string/action_buy"
+        android:layout_width="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/fragment_pedido_btn_edit"
+        android:text="@string/action_edit"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/fragment_pedido_text_precio"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="30dp"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/fragment_pedido_btn_delete"
+        android:text="@string/action_delete"
+        android:layout_alignBaseline="@+id/fragment_pedido_btn_edit"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>
+</android.support.v7.widget.CardView>
