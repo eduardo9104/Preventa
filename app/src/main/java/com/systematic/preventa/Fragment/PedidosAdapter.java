@@ -11,31 +11,35 @@ import android.widget.Toast;
 
 import com.systematic.preventa.DataBase.StringTitle;
 import com.systematic.preventa.Entity.Pedido;
-import com.systematic.preventa.Fragment.PedidosFragment.OnListFragmentInteractionListener;
 import com.systematic.preventa.R;
+import com.systematic.preventa.Util.AmountFragment;
 import com.systematic.preventa.dummy.DummyContent.DummyItem;
 
 import java.util.List;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
+ * specified {@link
+ * }.
  * TODO: Replace the implementation with code for your data type.
  */
 public class PedidosAdapter extends RecyclerView.Adapter<PedidosAdapter.ViewHolder> {
 
     private final List<Pedido> mValues;
-    private final OnListFragmentInteractionListener mListener;
+    private final RecipeFragment.OnListFragmentInteractionListener mListener;
     private Context context;
+    private View view;
 
-    public PedidosAdapter(List<Pedido> items, OnListFragmentInteractionListener listener) {
+
+    public PedidosAdapter(List<Pedido> items, RecipeFragment.OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
+
+         view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_pedido, parent, false);
         context = view.getContext();
         return new ViewHolder(view);
@@ -45,9 +49,9 @@ public class PedidosAdapter extends RecyclerView.Adapter<PedidosAdapter.ViewHold
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         holder.mIdView.setText(mValues.get(position).getId());
-        holder.mCantidad.setText(StringTitle.titleCantidad+"\n"+mValues.get(position).getParseCantidad());
-        holder.mNombre.setText(StringTitle.titleNombre+"\n"+mValues.get(position).getProduct().getName());
-        holder.mPrecio.setText(StringTitle.titlePrecio+"\n"+mValues.get(position).getProduct().getCuotas().get(0).getParseMonto());
+        holder.mCantidad.setText(mValues.get(position).getParseCantidad());
+        holder.mNombre.setText(mValues.get(position).getProduct().getName());
+        holder.mPrecio.setText(mValues.get(position).getProduct().getCuotas().get(0).getParseMonto());
 
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -57,17 +61,19 @@ public class PedidosAdapter extends RecyclerView.Adapter<PedidosAdapter.ViewHold
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
                     mListener.onListFragmentInteraction(holder.mItem);
+                    mListener.onCalculateTotal();
                 }
             }
         });
 
         holder.mEliminar.setOnClickListener(v -> {
             mValues.remove(position);
+            this.notifyItemRemoved(position);
         });
 
-        holder.mEditar.setOnClickListener(v -> {
-            Toast.makeText(context, "Editar",Toast.LENGTH_LONG).show();
-        });
+        holder.mEditar.setOnClickListener(v ->
+                AmountFragment.updateDialog(view,mValues,position)
+        );
     }
 
     @Override
@@ -89,12 +95,12 @@ public class PedidosAdapter extends RecyclerView.Adapter<PedidosAdapter.ViewHold
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.fragment_pedido_id);
-            mNombre = (TextView) view.findViewById(R.id.fragment_pedido_text_name);
-            mCantidad = (TextView) view.findViewById(R.id.fragment_pedido_text_cantidad);
-            mPrecio = (TextView) view.findViewById(R.id.fragment_pedido_text_precio);
-            mEditar = (Button) view.findViewById(R.id.fragment_pedido_btn_edit);
-            mEliminar = (Button) view.findViewById(R.id.fragment_pedido_btn_delete);
+            mIdView = (TextView) view.findViewById(R.id.recipe_id);
+            mNombre = (TextView) view.findViewById(R.id.recipe_name_value);
+            mCantidad = (TextView) view.findViewById(R.id.recipe_amount_value);
+            mPrecio = (TextView) view.findViewById(R.id.recipe_price_value);
+            mEditar = (Button) view.findViewById(R.id.recipe_edit_btn);
+            mEliminar = (Button) view.findViewById(R.id.recipe_delete_btn);
 
         }
 

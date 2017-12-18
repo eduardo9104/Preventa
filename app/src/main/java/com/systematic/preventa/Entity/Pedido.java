@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.security.PublicKey;
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
@@ -21,6 +22,7 @@ public class Pedido implements Serializable {
     @SerializedName("cantidad")
     @Expose
     private int cantidad;
+
 
     public Pedido(String id, Product product, int cantidad) {
         this.id = id;

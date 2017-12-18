@@ -1,13 +1,24 @@
 <resources>
     <string name="app_name">Preventa</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">Preventa</string>
     <string name="title_home">Catálogo</string>
     <string name="title_carshop">Pedidos</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="action_search">Buscar</string>
-    <string name="action_buy">Comprar</string>
+    <string name="action_buy">Agregar</string>
     <string name="action_cancel">Cancelar</string>
     <string name="action_edit">Editar</string>
     <string name="action_delete">Eliminar</string>
+    <string name="action_description">Descripcion</string>
+    <string name="title_wholesale_price">Precio mayorista: 100</string>
+    <string name="title_retail_price">Precio minorista: 50</string>
+    <string name="title_dialog_amount">Cantidad</string>
+    <string name="recipe_total_title">Total : </string>
+    <string name="recipe_name_title">Nombre</string>
+    <string name="recipe_amount_title">Cantidad</string>
+    <string name="recipe_price_title">Precio</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">0</string>
 </resources>

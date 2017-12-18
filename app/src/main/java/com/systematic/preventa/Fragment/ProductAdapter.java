@@ -4,13 +4,11 @@ import android.animation.Animator;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
@@ -20,10 +18,12 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.systematic.preventa.DataBase.PedidoDB;
+import com.systematic.preventa.DataBase.StringTitle;
 import com.systematic.preventa.Entity.Pedido;
 import com.systematic.preventa.Entity.Product;
 import com.systematic.preventa.Entity.Tag;
 import com.systematic.preventa.R;
+import com.systematic.preventa.Util.AmountFragment;
 
 
 import java.util.ArrayList;
@@ -35,9 +35,6 @@ import java.util.List;
  * TODO: Replace the implementation with code for your data type.
  */
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> implements Filterable {
-    public final String productCodeTitle = "Codigo: ";
-    public final String productPreciosTitle = "Precios: ";
-
     private final List<Product> mValues;
     private final List<Pedido> mPedidos;
     private List<Product> mValuesFilter;
@@ -80,10 +77,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         if (mValuesFilter.size() > 0) {
             Product product = mValuesFilter.get(position);
             holder.mIdView.setText(product.getId());
-            holder.mCodeView.setText(productCodeTitle + "\n" + product.getCode());
-            holder.precioView.setText(productPreciosTitle + "\n" + product.cuotasStringFormat());
+            holder.mCodeView.setText("");
+            holder.retail_priceviewView.setText(StringTitle.titleWholePrice +product.getCuotas().get(0).getMonto());
+            holder.wholesale_priceView.setText(StringTitle.titleRetailPrice + product.getCuotas().get(1).getMonto());
             holder.nameView.setText(product.getName());
-            Picasso.with(context).load(R.drawable.applicationsoffice).into(holder.imageView);
+            Picasso.with(context).load(R.drawable.product).into(holder.imageView);
         }
 
 
@@ -121,35 +119,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.mComprarView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Product product = mValues.get(position);
-
-                // 1. Instantiate an AlertDialog.Builder with its constructor
-                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-                // Get the layout inflater
-                LayoutInflater inflater = LayoutInflater.from(view.getContext());
-
-                // 2. Chain together various setter methods to set the dialog characteristic
-                View dialog_view = inflater.inflate(R.layout.test, null);
-                builder.setView(dialog_view)
-                        .setTitle("Cantidad")
-                        .setPositiveButton(R.string.action_buy, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                                String cantidad = ((EditText)dialog_view.findViewById(R.id.dialog_cantidad)).getText().toString();
-                                addPedido(cantidad,product);
-                            }
-                        })
-                        .setNegativeButton(R.string.action_cancel,(dialog, which) -> {
-                           dialog.cancel();
-                        })
-                ;
-
-
-                // 3. Get the AlertDialog from create()
-                AlertDialog dialog = builder.create();
-                dialog.show();
+                AmountFragment.insertDialog(view,product,mPedidos);
             }
         });
 
@@ -167,9 +138,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         public final TextView mCodeView;
         public final ImageView imageView;
         public final TextView nameView;
-        public final TextView precioView;
+        public final TextView wholesale_priceView;
+        public final TextView retail_priceviewView;
         public final TextView mProductDescriptionView;
-        public final Button mComprarView;
+        public final FloatingActionButton mComprarView;
 
 
         public ViewHolder(View view) {
@@ -180,7 +152,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             imageView = (ImageView) view.findViewById(R.id.fragment_product_img);
             mProductDescriptionView = view.findViewById(R.id.fragment_product_text_description);
             this.nameView = view.findViewById(R.id.fragment_product_text_name);
-            this.precioView = view.findViewById(R.id.fragment_product_text_precios);
+            this.wholesale_priceView = view.findViewById(R.id.fragment_product_text_wholesale_price);
+            this.retail_priceviewView = view.findViewById(R.id.fragment_product_text_retail_price);
             this.mComprarView = view.findViewById(R.id.fragment_product_btn_comprar);
 
         }
@@ -197,7 +170,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             @Override
             protected FilterResults performFiltering(CharSequence charSequence) {
 
-                String charString = charSequence.toString();
+                String charString = charSequence.toString().toLowerCase();
 
                 if (charString.isEmpty()) {
                     mValuesFilter = mValues;
@@ -205,16 +178,16 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
                     ArrayList<Product> filteredList = new ArrayList<>();
 
-                    for (Product androidVersion : mValues) {
+                    for (Product product : mValues) {
 
-                        if (androidVersion.getName() != null &&
-                                (androidVersion.getName().toLowerCase().contains(charString) || androidVersion.getCode().toLowerCase().contains(charString))) {
-                            filteredList.add(androidVersion);
+                        if (product.getName() != null &&
+                                (product.getName().toLowerCase().contains(charString) || product.getDescription().toLowerCase().contains(charString))) {
+                            filteredList.add(product);
 
 
-                        } else if (androidVersion.getTags().size() > 0) {
+                        } else if (product.getTags().size() > 0) {
                             int cont = 0;
-                            for (Tag tag : androidVersion.getTags()
+                            for (Tag tag : product.getTags()
                                     ) {
                                 if (tag.getValue().toLowerCase().contains(charString)) {
                                     cont++;
@@ -222,7 +195,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                             }
 
                             if (cont > 0) {
-                                filteredList.add(androidVersion);
+                                filteredList.add(product);
                             }
                         }
                     }

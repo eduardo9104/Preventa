@@ -124,9 +124,7 @@ public class ProductFragment extends Fragment {
 
             recycleview_aux = recyclerView;
             if(products.size() > 0 ){
-                System.out.println("prductos "+products.size());
                 recyclerView.setAdapter(new ProductAdapter(products,mListener,mParam2,pedidos));
-
                 recycleview_aux = recyclerView;
 
             }else{
@@ -196,32 +194,22 @@ public class ProductFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-
-
-
        // menu.clear();
         inflater.inflate(R.menu.menu_main, menu);
         super.onCreateOptionsMenu(menu,inflater);
         MenuItem search = menu.findItem(R.id.action_search);
 
         //MenuItemCompat.collapseActionView(search);
-
         searchView = (SearchView) MenuItemCompat.getActionView(search);
         searchView.setQueryHint("Buscar Productos");
-
-
         search(searchView);
     }
 
     private void search(final SearchView searchView) {
 
-
-
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-
-
                 return false;
             }
 
@@ -230,7 +218,6 @@ public class ProductFragment extends Fragment {
                 mAdapter = (ProductAdapter) recycleview_aux.getAdapter();
                 if (mAdapter != null)
                     mAdapter.getFilter().filter(newText);
-
                 return true;
             }
         });
