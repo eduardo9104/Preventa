@@ -12,8 +12,6 @@ import android.view.ViewGroup;
 
 import com.systematic.preventa.Entity.Pedido;
 import com.systematic.preventa.R;
-import com.systematic.preventa.dummy.DummyContent;
-import com.systematic.preventa.dummy.DummyContent.DummyItem;
 
 import java.io.Serializable;
 import java.util.ArrayList;

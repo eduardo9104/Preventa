@@ -6,11 +6,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.systematic.preventa.DataBase.PedidoDB;
+import com.systematic.preventa.DataBase.StringTitle;
 import com.systematic.preventa.Entity.Pedido;
 import com.systematic.preventa.Entity.Product;
 import com.systematic.preventa.R;
@@ -27,9 +29,9 @@ public class AmountFragment {
 
         // 2. Chain together various setter methods to set the dialog characteristic
         View dialog_view = inflater.inflate(R.layout.dialog_add_amount, null);
-        TextView amount = view.findViewById(R.id.recipe_amount_value);
+        Button amount = view.findViewById(R.id.recipe_edit_btn);
         if(amount!=null){
-            ((TextView)dialog_view.findViewById(R.id.dialog_cantidad)).setText(amount.getText());
+            ((TextView)dialog_view.findViewById(R.id.dialog_cantidad)).setText(pedidos.get(pedidoPos).getParseCantidad());
         }
 
         builder.setView(dialog_view)

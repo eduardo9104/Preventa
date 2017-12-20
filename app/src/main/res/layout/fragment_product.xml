@@ -49,7 +49,7 @@
                         android:layout_marginBottom="15dp"
                         android:layout_marginTop="15dp"
                         android:text="Nombre producto"
-                        android:textSize="30sp"
+                        android:textSize="20sp"
                         android:textStyle="normal" />
                     <TextView
                         android:id="@+id/fragment_product_text_code"
@@ -77,11 +77,10 @@
                 </LinearLayout>
 
                 <ImageView
-                    android:layout_width="120dp"
                     android:id="@+id/fragment_product_img"
-                    android:layout_height="120dp"
-                    android:background="@color/colorImage"
-                     />
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@color/colorImage" />
 
 
             </LinearLayout>

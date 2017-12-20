@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.systematic.preventa.ApiServices.ProductService;
+import com.systematic.preventa.DataBase.ProductDB;
 import com.systematic.preventa.Entity.ShopCar;
 import com.systematic.preventa.Entity.Pedido;
 import com.systematic.preventa.Entity.Product;
@@ -75,11 +76,11 @@ public class MainActivity extends AppCompatActivity  {
     }
 
     private void fillDataBase(){
-//        for (int i = 0; i < 5; i++) {
-//            this.products.add(ProductDB.getRandomProduct());
-//        }
+        for (int i = 0; i < 5; i++) {
+            this.products.add(ProductDB.getRandomProduct());
+        }
 
-        this.products = productService.getCatalogo();
+//        this.products = productService.getCatalogo();
     }
 
 

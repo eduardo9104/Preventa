@@ -6,19 +6,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
 import com.systematic.preventa.DataBase.StringTitle;
 import com.systematic.preventa.Entity.Pedido;
 import com.systematic.preventa.R;
 import com.systematic.preventa.Util.AmountFragment;
-import com.systematic.preventa.dummy.DummyContent.DummyItem;
 
 import java.util.List;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
+ * {@link RecyclerView.Adapter} that can display a {@link } and makes a call to the
  * specified {@link
  * }.
  * TODO: Replace the implementation with code for your data type.
@@ -49,9 +49,10 @@ public class PedidosAdapter extends RecyclerView.Adapter<PedidosAdapter.ViewHold
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         holder.mIdView.setText(mValues.get(position).getId());
-        holder.mCantidad.setText(mValues.get(position).getParseCantidad());
+        holder.mEditar.setText(        mValues.get(position).getParseCantidad());
         holder.mNombre.setText(mValues.get(position).getProduct().getName());
         holder.mPrecio.setText(mValues.get(position).getProduct().getCuotas().get(0).getParseMonto());
+        Picasso.with(context).load(R.drawable.product).into(holder.mImage);
 
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -85,10 +86,10 @@ public class PedidosAdapter extends RecyclerView.Adapter<PedidosAdapter.ViewHold
         public final View mView;
         public final TextView mIdView;
         public final TextView mNombre;
-        public final TextView mCantidad;
         public final TextView mPrecio;
         public final Button mEditar;
         public final Button mEliminar;
+        public final ImageView mImage;
 
         public Pedido mItem;
 
@@ -97,10 +98,10 @@ public class PedidosAdapter extends RecyclerView.Adapter<PedidosAdapter.ViewHold
             mView = view;
             mIdView = (TextView) view.findViewById(R.id.recipe_id);
             mNombre = (TextView) view.findViewById(R.id.recipe_name_value);
-            mCantidad = (TextView) view.findViewById(R.id.recipe_amount_value);
             mPrecio = (TextView) view.findViewById(R.id.recipe_price_value);
             mEditar = (Button) view.findViewById(R.id.recipe_edit_btn);
             mEliminar = (Button) view.findViewById(R.id.recipe_delete_btn);
+            mImage = (ImageView)view.findViewById(R.id.recipe_image);
 
         }
 

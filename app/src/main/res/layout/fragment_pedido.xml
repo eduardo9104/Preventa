@@ -1,63 +1,102 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    style="@style/Base.TextAppearance.AppCompat"
     android:layout_width="match_parent"
-    android:layout_height="20dp"
-    android:layout_marginBottom="5dp"
-    android:layout_marginTop="5dp"
-    tools:context="com.systematic.preventa.Fragment.PedidosFragment">
+    android:layout_height="wrap_content"
+    android:theme="@style/AppTheme"
+    card_view:cardBackgroundColor="@color/colorBackground"
+    android:layout_margin="5dp"
+    card_view:cardCornerRadius="2dp">
 
-    <TextView
-        android:id="@+id/recipe_id"
-        android:layout_width="wrap_content"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:textAppearance="?attr/textAppearanceListItem"
-        android:visibility="gone" />
+        android:padding="10dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/recipe_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="4dp"
+                android:background="@color/colorImage" />
+            <LinearLayout
+                android:layout_marginLeft="5dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/recipe_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:layout_margin="@dimen/text_margin"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:visibility="gone" />
 
 
-    <TextView
-        android:id="@+id/recipe_name_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.5"
-        android:shadowColor="@color/colorImage"
-        android:text="@string/recipe_name_title" />
+                <TextView
+                    android:id="@+id/recipe_name_value"
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:shadowColor="@color/colorImage"
+                    android:text="@string/recipe_name_title" />
 
-    <TextView
-        android:id="@+id/recipe_amount_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.2"
-        android:shadowColor="@color/colorImage"
-        android:text="@string/recipe_amount_title"
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/recipe_price_value"
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:shadowColor="@color/colorImage"
+                    android:text="@string/recipe_price_title"
+                    android:textAlignment="center" />
 
-        android:textAlignment="center" />
+            </LinearLayout>
 
-    <Button
-        android:id="@+id/recipe_edit_btn"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="10dp"
-        android:layout_height="20dp"
-        android:layout_weight="0.1"
-        android:background="@drawable/ic_action_edit" />
 
-    <TextView
-        android:id="@+id/recipe_price_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.2"
-        android:shadowColor="@color/colorImage"
-        android:text="@string/recipe_price_title"
-        android:textAlignment="center" />
 
-    <Button
-        android:id="@+id/recipe_delete_btn"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="10dp"
-        android:layout_height="24dp"
-        android:layout_weight="0.1"
-        android:background="@drawable/ic_action_delete" />
-</LinearLayout>
 
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/recipe_edit_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="@string/action_edit"
+                style="@style/Widget.AppCompat.Button" />
+
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4" />
+
+            <Button
+                android:id="@+id/recipe_delete_btn"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                style="@style/Widget.AppCompat.Button"
+                android:text="@string/action_delete" />
+        </LinearLayout>
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
